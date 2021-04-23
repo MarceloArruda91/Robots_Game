@@ -7,7 +7,7 @@
 using namespace std;
 
 
-#define fp 1 //Eletrical fence or post
+#define p 1 //Eletrical fence or post
 #define e 0 //Empyt 
 #define H 2 //Player
 #define R 3 //Robots
@@ -16,30 +16,33 @@ using namespace std;
 
 int linha = 1, coluna = 1;
 
-int maze[8][8] =
+int maze[10][20] =
 {
-1,1,1,1,1,1,1,1,
-1,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,1,
-1,1,1,1,1,1,1,1
+p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,
+p,e,e,R,e,e,e,e,e,e,e,e,R,e,e,e,e,e,e,p,
+p,e,e,e,R,e,p,e,e,p,e,e,p,e,e,e,e,e,e,p,
+p,e,e,e,e,e,e,e,e,H,e,e,p,e,e,e,e,e,e,p,
+p,e,e,e,p,p,e,e,e,e,e,p,e,e,e,p,e,e,e,p,
+p,e,e,e,p,e,e,e,e,e,p,e,e,e,p,e,e,e,e,p,
+p,e,e,e,e,e,p,e,p,e,e,e,e,R,e,e,p,e,e,p,
+p,e,e,p,e,e,e,e,e,e,e,e,e,e,e,p,p,e,e,p,
+p,e,e,e,e,e,R,e,e,e,e,e,e,p,e,e,e,e,e,p,
+p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p
+
 };
 
 void build_maze()
 {
     int l, c;
-    for (l = 0; l < 8; l++) {
-        for (c = 0; c < 8; c++) 
+    for (l = 0; l < 10; l++) {
+        for (c = 0; c < 20; c++) 
         {
-            if (maze[l][c] == e) printf("   ");
-            if (maze[l][c] == fp) printf("*  ");
-            /*if (maze[l][c] == H) printf(" H ");
-            if (maze[l][c] == h) printf(" h ");
-            if (maze[l][c] == R) printf(" R ");
-            if (maze[l][c] == r) printf(" r ");*/
+            if (maze[l][c] == e) printf(" ");
+            if (maze[l][c] == p) printf("*");
+            if (maze[l][c] == H) printf("H");
+            if (maze[l][c] == h) printf("h");
+            if (maze[l][c] == R) printf("R");
+            if (maze[l][c] == r) printf("r");
         }
         printf("\n");
 
