@@ -3,6 +3,11 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -101,6 +106,75 @@ void Rules()
 }
 
 
+void open_maze(string maze_n){
+    ifstream in(maze_n);
+    vector<vector<char> > v;
+    
+    if (in) {
+        string line;
+        
+        while (getline(in, line)) {
+            v.push_back(vector<char>());
+            
+            // Break down the row into column values
+            stringstream split(line);
+            char value;
+            
+            while (split >> value)
+                v.back().push_back(value);
+        }
+    }
+    
+    for (int i = 0; i < v.size(); i++) {
+        for (int j = 0; j < v[i].size(); j++)
+            cout << v[i][j];	
+            
+        cout << '\n';
+    }
+
+}
+
+void choose_maze()
+{
+    int choose;
+    cout << "Choose a maze";
+    el();
+    cout << "1) Maze 1";
+    el();
+    cout << "2) Maze 2";
+    el();
+    cout << "3) Maze 3";
+    el();
+
+    cin >> choose;
+
+    if (choose < 1 or choose > 3) 
+    {
+        cout << "Invalid Option! Try Again!" << endl;
+        choose_maze();
+    }
+    
+    else
+    {
+        switch (choose) {
+        case 1: 
+            open_maze("maze1.txt");
+            el();
+            break;
+        case 2: 
+            open_maze("maze2.txt");
+            el();
+            break;
+        case 3:
+            open_maze("maze3.txt");
+            el();
+            break;
+        }
+    }
+    
+  
+}
+
 
 void Menu()
 {
@@ -138,7 +212,7 @@ void Menu()
             }
             break;
         case 2: 
-            Game();
+            choose_maze();
             break;
         case 0:
             Exit();
@@ -149,20 +223,10 @@ void Menu()
 }
 
 
+
 int main()
 {
     Menu();
 
     return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
