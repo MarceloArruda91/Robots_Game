@@ -11,65 +11,16 @@
 
 using namespace std;
 
-
-#define p 1 //Eletrical fence or post
-#define e 0 //Empyt 
-#define H 2 //Player
-#define R 3 //Robots
-#define r 4 //Dead Robots
-#define h 5 //Dead Player
-
-int linha = 1, coluna = 1;
-
-int maze[10][20] =
-{
-p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,
-p,e,e,R,e,e,e,e,e,e,e,e,R,e,e,e,e,e,e,p,
-p,e,e,e,R,e,p,e,e,p,e,e,p,e,e,e,e,e,e,p,
-p,e,e,e,e,e,e,e,e,H,e,e,p,e,e,e,e,e,e,p,
-p,e,e,e,p,p,e,e,e,e,e,p,e,e,e,p,e,e,e,p,
-p,e,e,e,p,e,e,e,e,e,p,e,e,e,p,e,e,e,e,p,
-p,e,e,e,e,e,p,e,p,e,e,e,e,R,e,e,p,e,e,p,
-p,e,e,p,e,e,e,e,e,e,e,e,e,e,e,p,p,e,e,p,
-p,e,e,e,e,e,R,e,e,e,e,e,e,p,e,e,e,e,e,p,
-p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p
-
-};
-
-void build_maze()
-{
-    int l, c;
-    for (l = 0; l < 10; l++) {
-        for (c = 0; c < 20; c++) 
-        {
-            if (maze[l][c] == e) printf(" ");
-            if (maze[l][c] == p) printf("*");
-            if (maze[l][c] == H) printf("H");
-            if (maze[l][c] == h) printf("h");
-            if (maze[l][c] == R) printf("R");
-            if (maze[l][c] == r) printf("r");
-        }
-        printf("\n");
-
-    }
-    printf("\n\n");
-}
-
-
 void el() // Empyt Line
 {
     cout << endl;
 }
 
+
 void Exit()
 {
     cout << "Game Over!" << endl;
     exit(0);
-}
-
-void Game()
-{  
-    build_maze();
 }
 
 
@@ -106,7 +57,7 @@ void Rules()
 }
 
 
-void open_maze(string maze_n){
+void open_maze(string maze_n){ // Open and build selected maze
     ifstream in(maze_n);
     vector<vector<char> > v;
     
@@ -125,7 +76,7 @@ void open_maze(string maze_n){
         }
     }
     
-    for (int i = 0; i < v.size(); i++) {
+    for (int i = 1; i < v.size(); i++) {
         for (int j = 0; j < v[i].size(); j++)
             cout << v[i][j];	
             
@@ -133,6 +84,22 @@ void open_maze(string maze_n){
     }
 
 }
+
+
+void movement()
+{
+    char move;
+    cout << "Move";
+    el();
+    cin >> move;
+
+    if (move != "Q" or move != "W" or move != "E" or move != "A" or move != "S" or move != "D" or move != "Z" or move != "X" or move != "C") 
+    {
+        cout << "Invalid Option! Try Again!" << endl;
+        choose_maze();
+    }
+}
+
 
 void choose_maze()
 {
@@ -158,15 +125,15 @@ void choose_maze()
     {
         switch (choose) {
         case 1: 
-            open_maze("maze1.txt");
+            open_maze("MAZE_01.txt");
             el();
             break;
         case 2: 
-            open_maze("maze2.txt");
+            open_maze("MAZE_02.txt");
             el();
             break;
         case 3:
-            open_maze("maze3.txt");
+            open_maze("MAZE_03.txt");
             el();
             break;
         }
@@ -221,7 +188,6 @@ void Menu()
     }
 
 }
-
 
 
 int main()
